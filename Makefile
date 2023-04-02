@@ -1,13 +1,13 @@
-BUILD-NUMBER = 0
-
-.PHONY: run
-run:
-	fvm flutter run --device-id ${device}
 
 .PHONY: create 
 create:
-	fvm use ${version} --force
-	fvm flutter create .
+	asdf local flutter ${version}
+	flutter create .
+
+.PHONY: clean
+clean:
+	flutter clean
+	flutter pub get
 
 .PHONY: clear
 clear:
@@ -18,20 +18,16 @@ clear:
 
 .PHONY: doctor
 doctor:
-	fvm flutter doctor
+	flutter doctor
 	
 .PHONY: devices
 devices:
-	fvm flutter devices
-	
-.PHONY: clean
-clean:
-	fvm flutter clean
+	flutter devices
 	
 .PHONY: pub-get
 pub-get:
-	fvm flutter pub get
+	flutter pub get
 
 .PHONY: build-runner
 build-runner:
-	fvm flutter pub pub run build_runner watch --delete-conflicting-outputs
+	flutter pub run build_runner watch --delete-conflicting-outputs
